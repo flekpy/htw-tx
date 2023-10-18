@@ -1,3 +1,9 @@
+import { AddressInfo } from 'shared/ui/AddressInfo'
+
 export const Main = () => {
-  return <div>main page</div>
+  return (
+    <>
+      <AddressInfo />
+    </>
+  )
 }
