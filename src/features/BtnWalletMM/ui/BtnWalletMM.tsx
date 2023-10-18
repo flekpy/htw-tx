@@ -1,10 +1,10 @@
-import { HTMLAttributes, DetailedHTMLProps, ReactNode, FC } from 'react'
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode, FC } from 'react'
 
 import styles from './BtnWallet.module.sass'
 
 export interface ButtonProps
   extends DetailedHTMLProps<
-    HTMLAttributes<HTMLButtonElement>,
+    ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
   children: ReactNode
