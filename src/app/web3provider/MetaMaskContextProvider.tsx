@@ -27,14 +27,13 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
   const clearError = () => setErrorMessage('')
 
   const _updateWallet = useCallback(async (providerAccounts?: any) => {
-    console.log(providerAccounts, 'providerAccounts')
-
     const accounts =
       providerAccounts ||
       (await window.ethereum?.request({ method: 'eth_accounts' }))
 
     if (accounts.length == 0) {
       setWallet(disconnectedState)
+      localStorage.removeItem('is_wallet_connected')
       return
     }
 
@@ -52,6 +51,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
       method: 'eth_chainId'
     })
     setWallet({ accounts, balance, chainId })
+    localStorage.setItem('is_wallet_connected', 'true')
   }, [])
 
   const updateWalletAndAccounts = useCallback(
@@ -74,7 +74,6 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
         window.ethereum?.on('chainChanged', updateWalletAndAccounts)
       }
     }
-
     getProvider()
 
     return () => {
@@ -85,18 +84,19 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
 
   const connectMetaMask = async () => {
     setIsConnecting(true)
-
     try {
       const accounts = await window.ethereum.request({
         method: 'eth_requestAccounts'
       })
       clearError()
       updateWallet(accounts)
+      localStorage.setItem('is_wallet_connected', 'true')
     } catch (error) {
       setErrorMessage(String(error))
     }
     setIsConnecting(false)
   }
+
   return (
     <MetaMaskContext.Provider
       value={{
