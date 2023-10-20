@@ -1,3 +1,9 @@
+import { CreateTx } from 'features/CreateTx'
+
 export const Main = () => {
-  return <>main page</>
+  return (
+    <>
+      <CreateTx />
+    </>
+  )
 }
