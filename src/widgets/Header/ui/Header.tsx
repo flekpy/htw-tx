@@ -1,6 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react'
 
 import MetaMaskIcon from 'shared/assets/metamaskSvgIcon/metamaskIcon.svg?react'
+import { AddressInfo } from 'shared/ui/AddressInfo'
 import { BtnWalletMM } from 'features/BtnWalletMM'
 import { useMetaMask } from 'shared/hooks'
 import { LogoLink } from 'shared/ui/Logo'
@@ -15,13 +16,18 @@ export const Header = ({ className, ...props }: HeaderProps) => {
   return (
     <header {...props} className={`${className} ${styles.headerContainer}`}>
       <LogoLink />
-      {window.ethereum?.isMetaMask && wallet.accounts.length < 1 && (
-        <BtnWalletMM disabled={isConnecting} onClick={connectMetaMask}>
-          <div className={styles.mmIconWrapper}>
-            <MetaMaskIcon />
-          </div>
-          Connect wallet
-        </BtnWalletMM>
+      {window.localStorage.getItem('is_wallet_connected') ? (
+        <AddressInfo />
+      ) : (
+        window.ethereum?.isMetaMask &&
+        wallet.accounts.length < 1 && (
+          <BtnWalletMM disabled={isConnecting} onClick={connectMetaMask}>
+            <div className={styles.mmIconWrapper}>
+              <MetaMaskIcon />
+            </div>
+            Connect wallet
+          </BtnWalletMM>
+        )
       )}
     </header>
   )
