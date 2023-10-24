@@ -4,6 +4,9 @@
   padding: 10px
   border-radius: 10px
   background-color: #0F141E
+  display: flex
+  align-items: center
+  flex-direction: column
 
 .tooltipWrapper
   width: 40px
@@ -33,7 +36,7 @@
   border-radius: 10px
   background-color: var(--bg-components)
 
-.inputAmount
+.input
   width: 100%
   border: none
   outline: none
@@ -42,11 +45,26 @@
   margin-top: 10px 
   color: var(--color-primary)
 
-.inputAmount::placeholder
+.input::placeholder
   color: #414B5F
+
+.marginTop
+  margin-top: 30px
 
 .span
   color: #414B5F
+
+.btnSend
+  padding: 0
+  width: 100px
+  height: 50px
+  border: none
+  font-size: 20px
+  cursor: pointer
+  margin-top: 30px
+  border-radius: 10px
+  background-color: #2A85FF
+  color: var(--color-primary)
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button 

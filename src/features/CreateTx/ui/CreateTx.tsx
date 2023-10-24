@@ -3,16 +3,18 @@ import { ChangeEvent, useState } from 'react'
 import { Tooltip } from 'shared/ui/Tooltip'
 import styles from './CreateTx.module.sass'
 
+const regExPattern = /^[0-9]*[.,]?[0-9]*$/
 export const CreateTx = () => {
-  const [inputValue, setInputValue] = useState('')
+  const [amountInput, setAmountInput] = useState('')
+  const [recipientInput, setRecipientInput] = useState('')
 
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleAmountInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
-    const regex = /^[0-9]*[.,]?[0-9]*$/
-    const isValid = regex.test(value)
-    if (isValid) {
-      setInputValue(value)
-    }
+    const isValid = regExPattern.test(value)
+    if (isValid) setAmountInput(value)
+  }
+  const handleRecipientInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setRecipientInput(e.target.value)
   }
 
   return (
@@ -33,12 +35,25 @@ export const CreateTx = () => {
           autoCorrect="off"
           autoComplete="off"
           inputMode="decimal"
-          value={inputValue}
-          onChange={handleInput}
-          pattern="^[0-9]*[.,]?[0-9]*$"
-          className={styles.inputAmount}
+          value={amountInput}
+          className={styles.input}
+          onChange={handleAmountInput}
+          pattern={String(regExPattern)}
         />
       </div>
+
+      <div className={`${styles.inputWrapper} ${styles.marginTop}`}>
+        <span className={styles.span}>Recipient</span>
+        <input 
+          type="text"
+          minLength={40}
+          value={recipientInput}
+          className={styles.input}
+          onChange={handleRecipientInput}
+        />
+      </div>
+
+      <button className={styles.btnSend}>send</button>
     </section>
   )
 }
