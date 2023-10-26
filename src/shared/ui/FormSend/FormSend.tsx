@@ -45,45 +45,43 @@ export const FormSend = () => {
   }
 
   return (
-    <>
-      <form className={styles.form} onSubmit={handlerSubmitForm}>
-        <div className={styles.inputWrapper}>
-          <span className={styles.span}>You transfer</span>
-          <input
-            type="text"
-            name="amount"
-            minLength={1}
-            maxLength={79}
-            placeholder="0"
-            spellCheck={false}
-            autoCorrect="off"
-            autoComplete="off"
-            inputMode="decimal"
-            className={styles.input}
-            value={valueInput.amount}
-            onChange={handlerAmountInput}
-            pattern={String(regExPattern).slice(1, -1)}
-          />
-        </div>
-        <div className={`${styles.inputWrapper} ${styles.marginTop}`}>
-          <span className={styles.span}>Recipient</span>
-          <input 
-            type="text"
-            minLength={40}
-            className={styles.input}
-            value={valueInput.recipient}
-            onChange={handlerRecipientInput}
-          />
-        </div>
-        <button disabled={isLoading} className={styles.btnSend}>
-          {isLoading ? 'loading' : 'send'}
-        </button>
+    <form className={styles.form} onSubmit={handlerSubmitForm}>
+      <div className={styles.inputWrapper}>
+        <span className={styles.span}>You transfer</span>
+        <input
+          type="text"
+          name="amount"
+          minLength={1}
+          maxLength={79}
+          placeholder="0"
+          spellCheck={false}
+          autoCorrect="off"
+          autoComplete="off"
+          inputMode="decimal"
+          className={styles.input}
+          value={valueInput.amount}
+          onChange={handlerAmountInput}
+          pattern={String(regExPattern).slice(1, -1)}
+        />
+      </div>
+      <div className={`${styles.inputWrapper} ${styles.marginTop}`}>
+        <span className={styles.span}>Recipient</span>
+        <input 
+          type="text"
+          minLength={40}
+          className={styles.input}
+          value={valueInput.recipient}
+          onChange={handlerRecipientInput}
+        />
+      </div>
+      <button disabled={isLoading} className={styles.btnSend}>
+        {isLoading ? 'loading' : 'send'}
+      </button>
 
-        {isError ? 
-          (<div style={{color: 'red'}}>{isError}</div>) 
-          : (statusSend && (<div>success transfer</div>))
-        }
-      </form>
-    </>
+      {isError ? 
+        (<div style={{color: 'red'}}>{isError}</div>) 
+        : (statusSend && (<div>success transfer</div>))
+      }
+    </form>
   )
 }
