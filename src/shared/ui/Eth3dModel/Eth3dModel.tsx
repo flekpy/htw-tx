@@ -15,7 +15,7 @@ type GLTFResult = GLTF & {
     ['Material.002']: THREE.MeshStandardMaterial
   }
 }
-const urlEthModel3d = '/src/shared/assets/3dModels/eth.glb'
+const urlEthModel3d = '/shared/assets/3dModels/eth.glb'
 useGLTF.preload(urlEthModel3d)
 export function Eth3dModel(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF(urlEthModel3d) as GLTFResult
